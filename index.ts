@@ -22,13 +22,13 @@ const secVpc = aws.ec2.getVpc({
 
 const rtsFirst = aws.ec2.getRouteTables({
     tags: {
-        Name: "xw-cluster-4.k8s.local",
+        KubernetesCluster: "xw-cluster-4.k8s.local",
     },
 });
 
 const rtsSec = aws.ec2.getRouteTables({
     tags: {
-        Name: "xw-cluster-3.k8s.local",
+        KubernetesCluster: "xw-cluster-3.k8s.local",
     },
 });
 

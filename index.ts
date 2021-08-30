@@ -4,4 +4,7 @@ import * as awsx from "@pulumi/awsx";
 
 const vpc = new aws.ec2.Vpc("xw-pulumi-vpc", {
     cidrBlock: "10.129.0.0/16",
+    tags: {
+        Name: "xw-pulumi-vpc",
+    },
 });

@@ -20,5 +20,20 @@ const secVpc = aws.ec2.getVpc({
     },
 });
 
+const rtsFirst = new aws.ec2.getRouteTables({
+    tags: {
+        Name: "xw-cluster-4.k8s.local",
+    },
+});
+
+const rtsSec = new aws.ec2.getRouteTables({
+    tags: {
+        Name: "xw-cluster-3.k8s.local",
+    },
+});
+
 export const firstVpcId = firstVpc
 export const secVpcId = secVpc
+export const firstRTs = rtsFirst
+export const secRTs = rtsSec
+

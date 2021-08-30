@@ -48,5 +48,5 @@ export const firstVpcId = firstVpc
 export const secVpcId = secVpc
 export const firstRTs = rtsFirst
 export const secRTs = rtsSec
-export const vpcPeeringConnection
+export const vpcPC = vpcPeeringConnection
 

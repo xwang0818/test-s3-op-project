@@ -12,11 +12,11 @@ const firstVpc = aws.ec2.getVpc({
     },
 });
 
-const secVpc  = aws.ec2.getVpc({
+const secVpc = aws.ec2.getVpc({
     tags: {
         Name: vpcTag2,
     },
 });
 
-export const firstVpcId = firstVpc.id
-export const secVpcId = secVpc.id
+export const firstVpcId = firstVpc
+export const secVpcId = secVpc

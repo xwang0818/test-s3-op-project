@@ -50,7 +50,7 @@ let secondVpcCidr = secondVpc.then(secondVpc => secondVpc.cidrBlock)
 for (let i = 0; i < 5; i++) {
     let route = new aws.ec2.Route("route", {
         routeTableId: firstRTs.then(firstRTs => firstRTs.ids?[i]),
-        destinationCidrBlock: firstVpcCidr,
+        destinationCidrBlock: secondVpcCidr,
         vpcPeeringConnectionId: vpcPC.id,
     });
 }

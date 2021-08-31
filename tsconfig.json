@@ -2,11 +2,7 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es5",
-        "lib": [
-            "es2015.promise",
-            "dom"
-        ],
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,

@@ -47,6 +47,7 @@ const vpcPC = new aws.ec2.VpcPeeringConnection("vpcPeeringConnection", {
 let firstVpcCidr = firstVpc.then(firstVpc => firstVpc.cidrBlock);
 let secondVpcCidr = secondVpc.then(secondVpc => secondVpc.cidrBlock);
 
+/** https://github.com/pulumi/pulumi-aws/blob/52989a7f8b5fced978aff841d067ae702eac13a2/sdk/nodejs/ec2/getVpcPeeringConnection.ts#L25 */
 for (let i = 0; i < 4; i++) {
     let route = new aws.ec2.Route("vpc-peering-route-" + i, {
         routeTableId: firstRTs.then(firstRTs => firstRTs.ids[i]),

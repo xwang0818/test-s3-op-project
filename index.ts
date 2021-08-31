@@ -47,11 +47,11 @@ const vpcPC = new aws.ec2.VpcPeeringConnection("vpcPeeringConnection", {
 let firstVpcCidr = firstVpc.then(firstVpc => firstVpc.cidrBlock)
 let secondVpcCidr = secondVpc.then(secondVpc => secondVpc.cidrBlock)
 
-for (var rtId of firstRTs.all(firstRTs => firstRTs.ids)) {
+for (var rtId of firstRTs.then(firstRTs => firstRTs).ids) {
 
 }
 
-for (var rtId of firstRTs.all(firstRTs => firstRTs.ids)) {
+for (var rtId of firstRTs.then(firstRTs => firstRTs).ids) {
 
 }
 

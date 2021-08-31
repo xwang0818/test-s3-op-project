@@ -10,13 +10,13 @@ import * as awsx from "@pulumi/awsx";
 
 
 /** https://github.com/pulumi/pulumi-aws/blob/d26fdf80632ded25a926f9d4ed2f5e7234dc4cf8/sdk/nodejs/ec2/getVpc.ts */
-const firstVpc = await aws.ec2.getVpc({
+const firstVpc = aws.ec2.getVpc({
     tags: {
         Name: "xw-cluster-4.k8s.local",
     },
 });
 
-const secondVpc = await aws.ec2.getVpc({
+const secondVpc = aws.ec2.getVpc({
     tags: {
         Name: "xw-cluster-3.k8s.local",
     },
@@ -37,11 +37,11 @@ const rtsSec = aws.ec2.getRouteTables({
 
 /** https://github.com/pulumi/pulumi-aws/blob/52989a7f8b5fced978aff841d067ae702eac13a2/sdk/nodejs/ec2/vpcPeeringConnection.ts */
 const vpcPeeringConnection = new aws.ec2.VpcPeeringConnection("vpcPeeringConnection", {
-    peerVpcId: firstVpc.id,
-    vpcId: secondVpc.id,
+    peerVpcId: "vpc-00e251affcf2d582e",
+    vpcId: "vpc-05c84077e9a461680",
     autoAccept: true,
     tags: {
-        Name: "VPC Peering between fistVpc and secVpc",
+        Name: "VPC Peering between ",
     },
 });
 
@@ -49,5 +49,5 @@ export const fVpcId = firstVpc
 export const sVpcId = secondVpc
 export const firstRTs = rtsFirst
 export const secRTs = rtsSec
-/** export const vpcPC = vpcPeeringConnection */
+export const vpcPC = vpcPeeringConnection
 

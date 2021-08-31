@@ -46,9 +46,9 @@ const vpcPC = new aws.ec2.VpcPeeringConnection("vpcPeeringConnection", {
 });
 
  const route = new aws.ec2.Route("route", {
-     routeTableId: rtsFirst.ids[0],
-     destinationCidrBlock: vpcPC.then(vpcPC => vpcPC.peerCidrBlock),
-     vpcPeeringConnectionId: vpcPC.then(vpcPC => vpcPC.id),
+     routeTableId: "rtb-059b3e7c2ad544eef",
+     destinationCidrBlock: "10.124.0.0/16",
+     vpcPeeringConnectionId: vpcPC.id,
  });
 
 export const fVpcId = firstVpc

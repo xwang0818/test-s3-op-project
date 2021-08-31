@@ -44,6 +44,17 @@ const vpcPC = new aws.ec2.VpcPeeringConnection("vpcPeeringConnection", {
     },
 });
 
+let firstVpcCidr = firstVpc.then(firstVpc => firstVpc.cidrBlock)
+let firstVpcCidr = firstVpc.then(firstVpc => firstVpc.cidrBlock)
+
+for (var rtId of firstRTs.then(firstRTs => firstRTs.ids) {
+
+}
+
+for (var rtId of firstRTs.then(firstRTs => firstRTs.ids) {
+
+}
+
 /**
 const route = new aws.ec2.Route("route", {
     routeTableId: "rtb-059b3e7c2ad544eef",

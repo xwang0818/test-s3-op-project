@@ -36,18 +36,24 @@ const rtsSec = aws.ec2.getRouteTables({
 });
 
 /** https://github.com/pulumi/pulumi-aws/blob/52989a7f8b5fced978aff841d067ae702eac13a2/sdk/nodejs/ec2/vpcPeeringConnection.ts */
-const vpcPeeringConnection = new aws.ec2.VpcPeeringConnection("vpcPeeringConnection", {
+const vpcPC = new aws.ec2.VpcPeeringConnection("vpcPeeringConnection", {
     peerVpcId: "vpc-00e251affcf2d582e",
     vpcId: "vpc-05c84077e9a461680",
     autoAccept: true,
     tags: {
-        Name: "VPC Peering between ",
+        Name: "VPC Peering Connection Pulumi Test",
     },
 });
+
+ const route = new aws.ec2.Route("route", {
+     routeTableId: rtsFirst.ids[0],
+     destinationCidrBlock: vpcPC.then(vpcPC => vpcPC.peerCidrBlock),
+     vpcPeeringConnectionId: vpcPC.then(vpcPC => vpcPC.id),
+ });
 
 export const fVpcId = firstVpc
 export const sVpcId = secondVpc
 export const firstRTs = rtsFirst
 export const secRTs = rtsSec
-export const vpcPC = vpcPeeringConnection
+export const pc = vpcPC
 

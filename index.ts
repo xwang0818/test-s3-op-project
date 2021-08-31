@@ -4,32 +4,31 @@ import * as awsx from "@pulumi/awsx";
 
 /**
 * const config = new pulumi.Config();
-* const vpcTag1 = config.requireObject("xw-cluster-4.k8s.local");
-* const vpcTag2 = config.requireObject("xw-cluster-3.k8s.local");
+* const firstTag = config.requireObject("firstVpc");
+* const secondTag = config.requireObject("secondVpc");
 */
-
 
 /** https://github.com/pulumi/pulumi-aws/blob/d26fdf80632ded25a926f9d4ed2f5e7234dc4cf8/sdk/nodejs/ec2/getVpc.ts */
 const firstVpc = aws.ec2.getVpc({
     tags: {
-        Name: "xw-cluster-4.k8s.local",
+        Name: "xw-cluster-4.k8s.local", // firstTag,
     },
 });
 
 const secondVpc = aws.ec2.getVpc({
     tags: {
-        Name: "xw-cluster-3.k8s.local",
+        Name: "xw-cluster-3.k8s.local", // secondTag,
     },
 });
 
 /** https://github.com/pulumi/pulumi-aws/blob/d26fdf80632ded25a926f9d4ed2f5e7234dc4cf8/sdk/nodejs/ec2/getRouteTables.ts */
-const rtsFirst = aws.ec2.getRouteTables({
+const firstRTs = aws.ec2.getRouteTables({
     tags: {
         KubernetesCluster: "xw-cluster-4.k8s.local",
     },
 });
 
-const rtsSec = aws.ec2.getRouteTables({
+const secondRTs = aws.ec2.getRouteTables({
     tags: {
         KubernetesCluster: "xw-cluster-3.k8s.local",
     },
@@ -37,23 +36,25 @@ const rtsSec = aws.ec2.getRouteTables({
 
 /** https://github.com/pulumi/pulumi-aws/blob/52989a7f8b5fced978aff841d067ae702eac13a2/sdk/nodejs/ec2/vpcPeeringConnection.ts */
 const vpcPC = new aws.ec2.VpcPeeringConnection("vpcPeeringConnection", {
-    peerVpcId: "vpc-00e251affcf2d582e",
-    vpcId: secondVpc.then(secondVpc => secondVpc.id), //"vpc-05c84077e9a461680",
+    peerVpcId: firstVpc.then(firstVpc => firstVpc.id), 
+    vpcId: secondVpc.then(secondVpc => secondVpc.id),
     autoAccept: true,
     tags: {
         Name: "VPC Peering Connection Pulumi Test",
     },
 });
 
- const route = new aws.ec2.Route("route", {
-     routeTableId: "rtb-059b3e7c2ad544eef",
-     destinationCidrBlock: "10.124.0.0/16",
-     vpcPeeringConnectionId: vpcPC.id,
- });
+/**
+const route = new aws.ec2.Route("route", {
+    routeTableId: "rtb-059b3e7c2ad544eef",
+    destinationCidrBlock: "10.124.0.0/16",
+    vpcPeeringConnectionId: vpcPC.id,
+});
+*/
 
-export const fVpc = firstVpc
-export const sVpc = secondVpc
-export const firstRTs = rtsFirst
-export const secRTs = rtsSec
-export const pc = vpcPC
+export const vpcFirst  = firstVpc
+export const vpcSecond = secondVpc
+export const rtsFirst  = firstRTs
+export const rtsSecond = secondRTs
+export const vpcPeerConnection = vpcPC
 

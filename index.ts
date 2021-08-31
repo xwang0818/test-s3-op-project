@@ -47,21 +47,13 @@ const vpcPC = new aws.ec2.VpcPeeringConnection("vpcPeeringConnection", {
 let firstVpcCidr = firstVpc.then(firstVpc => firstVpc.cidrBlock)
 let secondVpcCidr = secondVpc.then(secondVpc => secondVpc.cidrBlock)
 
-for (var rtId of firstRTs.then(firstRTs => firstRTs).ids) {
-
+for (let i = 0; i < 5; i++) {
+    let route = new aws.ec2.Route("route", {
+        routeTableId: firstRTs.then(firstRTs => firstRTs.ids?[i]),
+        destinationCidrBlock: firstVpcCidr,
+        vpcPeeringConnectionId: vpcPC.id,
+    });
 }
-
-for (var rtId of firstRTs.then(firstRTs => firstRTs).ids) {
-
-}
-
-/**
-const route = new aws.ec2.Route("route", {
-    routeTableId: "rtb-059b3e7c2ad544eef",
-    destinationCidrBlock: "10.124.0.0/16",
-    vpcPeeringConnectionId: vpcPC.id,
-});
-*/
 
 export const vpcFirst  = firstVpc
 export const vpcSecond = secondVpc

@@ -9,13 +9,13 @@ import * as awsx from "@pulumi/awsx";
 */
 
 /** https://github.com/pulumi/pulumi-aws/blob/d26fdf80632ded25a926f9d4ed2f5e7234dc4cf8/sdk/nodejs/ec2/getVpc.ts */
-const firstVpc: aws.ec2.GetVpcResult = aws.ec2.getVpc({
+const firstVpc: Promise<aws.ec2.GetVpcResult> = aws.ec2.getVpc({
     tags: {
         Name: "xw-cluster-4.k8s.local",
     },
 });
 
-const secondVpc: aws.ec2.GetVpcResult = aws.ec2.getVpc({
+const secondVpc: Promise<aws.ec2.GetVpcResult> = aws.ec2.getVpc({
     tags: {
         Name: "xw-cluster-3.k8s.local",
     },

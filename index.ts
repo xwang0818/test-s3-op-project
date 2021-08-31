@@ -8,18 +8,26 @@ import * as awsx from "@pulumi/awsx";
 * const vpcTag2 = config.requireObject("xw-cluster-3.k8s.local");
 */
 
+type AsyncReturnType<T extends (...args: any) => any> =
+	T extends (...args: any) => Promise<infer U> ? U :
+	T extends (...args: any) => infer U ? U :
+	any
+
 /** https://github.com/pulumi/pulumi-aws/blob/d26fdf80632ded25a926f9d4ed2f5e7234dc4cf8/sdk/nodejs/ec2/getVpc.ts */
-const firstVpc: Promise<aws.ec2.GetVpcResult> = aws.ec2.getVpc({
+const fVpc: Promise<aws.ec2.GetVpcResult> = aws.ec2.getVpc({
     tags: {
         Name: "xw-cluster-4.k8s.local",
     },
 });
 
-const secondVpc: Promise<aws.ec2.GetVpcResult> = aws.ec2.getVpc({
+const sVpc: Promise<aws.ec2.GetVpcResult> = aws.ec2.getVpc({
     tags: {
         Name: "xw-cluster-3.k8s.local",
     },
 });
+
+type firstVpc = AsyncReturnType<(fVpc) => Promise<aws.ec2.GetVpcResult>>
+type secondVpc = AsyncReturnType<(sVpc) => Promise<aws.ec2.GetVpcResult>>
 
 /** https://github.com/pulumi/pulumi-aws/blob/d26fdf80632ded25a926f9d4ed2f5e7234dc4cf8/sdk/nodejs/ec2/getRouteTables.ts */
 const rtsFirst = aws.ec2.getRouteTables({

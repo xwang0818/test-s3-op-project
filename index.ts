@@ -3,9 +3,9 @@ import * as aws from "@pulumi/aws";
 import * as awsx from "@pulumi/awsx";
 
 
-const config = new pulumi.Config();
-const firstTag = config.requireObject("firstVpc");
-const secondTag = config.requireObject("secondVpc");
+//const config = new pulumi.Config();
+const firstTag = "xw-cluster-4.k8s.local"; //config.requireObject("firstVpc");
+const secondTag = "xw-cluster-3.k8s.local"; //config.requireObject("secondVpc");
 
 
 /** https://github.com/pulumi/pulumi-aws/blob/d26fdf80632ded25a926f9d4ed2f5e7234dc4cf8/sdk/nodejs/ec2/getVpc.ts */

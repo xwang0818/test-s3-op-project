@@ -1,2 +1,4 @@
 config:
   aws:region: us-west-2
+  firstVpc: xw-cluster-4.k8s.local
+  secondVpc: xw-cluster-3.k8s.local
